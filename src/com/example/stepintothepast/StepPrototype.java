@@ -26,7 +26,7 @@ public class StepPrototype extends Activity implements SensorEventListener {
     private TextView gen;
     boolean activityRunning;
     private final int avgLife = 50;
-    private long curYear = 2014;
+    private long curYear;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class StepPrototype extends Activity implements SensorEventListener {
         steps = (TextView) findViewById(R.id.steps);
         year = (TextView) findViewById(R.id.YearCount);
         gen = (TextView) findViewById(R.id.GenCount);
-
+        curYear = Long.parseLong(year.getText().toString(),10);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 	}
 
@@ -68,6 +68,7 @@ public class StepPrototype extends Activity implements SensorEventListener {
     protected void onResume() {
         super.onResume();
         activityRunning = true;
+
         Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if (countSensor != null) {
             sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
